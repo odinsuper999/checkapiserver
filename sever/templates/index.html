@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox API</title>
+</head>
+<body>
+    <h1>Checkbox API</h1>
+	<h1>Tick to homepage</h1>
+    <h1>No tick to login webview</h1>
+    <!-- Checkbox để thay đổi giá trị true/false -->
+    <input type="checkbox" id="checkbox" {% if checkbox_state %}checked{% endif %}>
+    
+    <!-- Script JavaScript để xử lý sự kiện thay đổi checkbox -->
+    <script>
+        document.getElementById('checkbox').addEventListener('change', function() {
+            var isChecked = this.checked;
+            // Gửi yêu cầu POST để cập nhật giá trị checkbox trên máy chủ Flask
+            fetch('/update_checkbox', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({isChecked: isChecked})
+            });
+        });
+    </script>
+</body>
+</html>
